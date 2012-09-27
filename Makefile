@@ -11,6 +11,7 @@ all: main.bin
 
 main.bin: main.c
 	$(CROSS_COMPILE)gcc \
+		-DUSE_STDPERIPH_DRIVER \
 		-Wl,-Tmain.ld -nostartfiles \
 		-I. -Ilibraries/CMSIS/CM3/CoreSupport \
 		-Ilibraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x \

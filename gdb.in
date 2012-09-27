@@ -1,0 +1,29 @@
+file main.elf
+target remote :3333
+b main.c:5
+c
+call RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE)
+call RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE)
+set ((GPIO_InitTypeDef*)x)->GPIO_Pin = GPIO_Pin_3
+set ((GPIO_InitTypeDef*)x)->GPIO_Mode = GPIO_Mode_IN_FLOATING
+call GPIO_Init(GPIOA, x)
+set ((GPIO_InitTypeDef*)x)->GPIO_Pin = GPIO_Pin_2
+set ((GPIO_InitTypeDef*)x)->GPIO_Speed = GPIO_Speed_50MHz
+set ((GPIO_InitTypeDef*)x)->GPIO_Mode = GPIO_Mode_AF_PP
+call GPIO_Init(GPIOA, x)
+c
+set ((USART_InitTypeDef*)x)->USART_BaudRate = 9600
+set ((USART_InitTypeDef*)x)->USART_WordLength = USART_WordLength_8b
+set ((USART_InitTypeDef*)x)->USART_StopBits = USART_StopBits_1
+set ((USART_InitTypeDef*)x)->USART_Parity = USART_Parity_No
+set ((USART_InitTypeDef*)x)->USART_HardwareFlowControl = USART_HardwareFlowControl_None
+set ((USART_InitTypeDef*)x)->USART_Mode = USART_Mode_Rx | USART_Mode_Tx
+call USART_Init(USART2, x)
+call USART_Cmd(USART2, ENABLE)
+c
+call USART_SendData(USART2, 'H')
+call USART_SendData(USART2, 'e')
+call USART_SendData(USART2, 'l')
+call USART_SendData(USART2, 'l')
+call USART_SendData(USART2, 'o')
+call USART_SendData(USART2, '!')
