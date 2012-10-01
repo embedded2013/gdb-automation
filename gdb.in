@@ -1,7 +1,7 @@
 file main.elf
 target remote :3333
 set $osp = $sp
-set $sp = $sp + 16
+set $sp = $sp - 16
 b main.c:4
 c
 call RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE)
