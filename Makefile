@@ -42,7 +42,7 @@ qemudbg: main.bin
 gdbauto: main.bin
 	$(QEMU_STM32) -M stm32-p103 \
 		-gdb tcp::3333 -S \
-		-kernel main.bin &
+		-kernel main.bin -monitor null &
 	$(CROSS_COMPILE)gdb -x gdb.in
 
 emu: main.bin
